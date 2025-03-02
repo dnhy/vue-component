@@ -5,7 +5,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "pnpm -C play dev"
+    "dev": "pnpm -C play dev",
+    "doc:dev": "pnpm -C docs dev"
   },
   "keywords": [],
   "author": "",
@@ -14,7 +15,15 @@
     "@dnhy/components": "workspace:*",
     "@dnhy/theme-chalk": "workspace:*",
     "@dnhy/utils": "workspace:*",
+    "ant-design-vue": "^4.2.6",
+    "bdjf_http": "^1.0.10",
     "typescript": "^5.7.3",
-    "vue": "^3.5.13"
+    "vant": "^4.9.17",
+    "vue": "^3.5.13",
+    "vue-router": "^4.5.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue-jsx": "^4.1.1",
+    "sass": "^1.84.0"
   }
 }

@@ -1,13 +1,15 @@
 {
-  "name": "@dnhy/components",
+  "name": "docs",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "vitepress dev ."
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "sideEffects": false
+  "devDependencies": {
+    "vitepress": "^1.6.3"
+  }
 }
