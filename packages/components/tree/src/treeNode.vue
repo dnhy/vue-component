@@ -18,7 +18,7 @@
         </zIcon>
       </span>
       <span :class="bem.e('label')" @click="handleClick">
-        {{ node.label }}
+        <treeNodeContent :node="node" />
       </span>
     </div>
   </div>
@@ -28,15 +28,19 @@
 import Switcher from "../../internal-icon/Switcher";
 import Loading from "../../internal-icon/Loading";
 import { zIcon } from "../../icon";
-import { treeNodeEmits, treeNodeProps } from "./tree";
+import { treeInjectKey, treeNodeEmits, treeNodeProps } from "./tree";
 import { createNameSpace } from "@dnhy/utils/create";
-import { computed } from "vue";
+import { computed, inject } from "vue";
+import treeNodeContent from "./tree-node-content";
 
 const props = defineProps(treeNodeProps);
 
 const emit = defineEmits(treeNodeEmits);
 
 const bem = createNameSpace("tree-node");
+
+const treeContext = inject(treeInjectKey);
+console.log("treeContext :", treeContext?.slots.default!({ node: props.node }));
 
 const isLoading = computed(() => {
   return props.loadingKeys.has(props.node.key);

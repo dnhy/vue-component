@@ -21,7 +21,12 @@
     v-model:selected-keys="value"
     selectable
     multiple
-  ></z-tree>
+  >
+    <template #="{ node }">
+      {{ node?.key + "!!!!" }} -
+      {{ node?.label }}
+    </template>
+  </z-tree>
 </template>
 
 <script setup lang="ts">
@@ -51,7 +56,6 @@ function createLabel(level: number): string {
 }
 
 const data = ref(createData());
-console.log("data!!! :", data);
 const value = ref<key[]>([]);
 
 function createData() {

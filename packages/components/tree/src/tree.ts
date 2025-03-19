@@ -1,4 +1,9 @@
-import { ExtractPropTypes, PropType } from "vue";
+import type {
+  ExtractPropTypes,
+  InjectionKey,
+  PropType,
+  SetupContext,
+} from "vue";
 
 export type key = string | number;
 
@@ -80,3 +85,14 @@ export const treeNodeEmits = {
 };
 
 export type TreeNodeProps = Partial<ExtractPropTypes<typeof treeNodeProps>>;
+
+export interface TreeContext {
+  slots: SetupContext["slots"];
+}
+
+export const treeInjectKey: InjectionKey<TreeContext> = Symbol();
+
+export const treeNodeContentProps = {
+  node: Object as PropType<TreeNode>,
+  default: () => {},
+};

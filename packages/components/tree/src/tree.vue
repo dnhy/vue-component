@@ -14,8 +14,22 @@
 </template>
 
 <script setup lang="ts">
-import { computed, reactive, ref, watch } from "vue";
-import { type key, type TreeNode, type TreeOption, treeProps } from "./tree";
+import {
+  computed,
+  provide,
+  reactive,
+  ref,
+  useSlots,
+  watch,
+  defineSlots,
+} from "vue";
+import {
+  type key,
+  treeInjectKey,
+  type TreeNode,
+  type TreeOption,
+  treeProps,
+} from "./tree";
 import treeNode from "./treeNode.vue";
 import { createNameSpace } from "@dnhy/utils/create";
 
@@ -27,6 +41,9 @@ const bem = createNameSpace("tree");
 
 const props = defineProps(treeProps);
 const tree = ref<TreeNode[]>([]);
+
+provide(treeInjectKey, { slots: useSlots() });
+console.log("useSlots() :", useSlots());
 
 function createOptions(key: string, label: string, children: string) {
   return {
@@ -147,10 +164,13 @@ function toggleExpand(node: TreeNode) {
     : expand(node);
 }
 
+// TODO 换定义value和update:selected-keys尝试
+// 需要定义一个ref作为局部变量，接收props的值（对象需要深浅拷贝），并使用watch保证更新，这样局部才能更新这个传入的value属性；
+// 如果父组件需要同步更新，调用update:selected-keys更新父组件的值
 const selectedKeysModel = defineModel<key[]>("selected-keys");
 
 function handleSelect(node: TreeNode) {
-  // 拷贝一份，操作完之后赋值，避免反复触发getter
+  // 虽然由于是model的CustomRefImpl类型，可以直接修改，但一般都拷贝一份props出来操作，最后调update方法修改,避免父子组件频繁更新
   let keys = Array.from(selectedKeysModel.value!);
   if (!props.selectable) return;
 
