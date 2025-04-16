@@ -1,15 +1,11 @@
 <template>
   <div :class="bem.b()">
-    <treeNode
-      v-for="item in flattenTree"
-      :node="item"
-      :expanded="isExpanded(item)"
-      :key="item.key"
-      :loadingKeys="loadingKeysRef"
-      :selectedKeys="selectedKeysModel"
-      @select="handleSelect"
-      @toggle="toggleExpand(item)"
-    />
+    <virtualList :items="flattenTree">
+      <template #default="{ node }">
+        <treeNode :node="node" :expanded="isExpanded(node)" :key="node.key" :loadingKeys="loadingKeysRef"
+          :selectedKeys="selectedKeysModel" @select="handleSelect" @toggle="toggleExpand(node)" />
+      </template>
+    </virtualList>
   </div>
 </template>
 
@@ -32,6 +28,7 @@ import {
 } from "./tree";
 import treeNode from "./treeNode.vue";
 import { createNameSpace } from "@dnhy/utils/create";
+import virtualList from "./virtual-list";
 
 defineOptions({
   name: "z-tree",
@@ -45,7 +42,7 @@ const tree = ref<TreeNode[]>([]);
 provide(treeInjectKey, { slots: useSlots() });
 console.log("useSlots() :", useSlots());
 
-function createOptions(key: string, label: string, children: string) {
+function createOptions(key, label: string, children: string) {
   return {
     getKey(node: TreeOption) {
       return node[key] as string;

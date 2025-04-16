@@ -19,6 +19,8 @@
     :data="data"
     :on-load="handleLoad"
     v-model:selected-keys="value"
+    lable-field="xx"
+    key-field="prop"
     selectable
     multiple
   >
@@ -35,18 +37,18 @@ import { AddCircleOutline } from "@vicons/ionicons5";
 import { ref } from "vue";
 import type { key } from "@dnhy/components/tree";
 
-// function createData(level = 4, parentKey = ""): any {
-//   if (!level) return [];
-//   const arr = new Array(6 - level).fill(0);
-//   return arr.map((_, idx: number) => {
-//     const key = parentKey + level + idx;
-//     return {
-//       xx: createLabel(level), // 显示的内容
-//       prop: key, // 为了唯一性
-//       children: createData(level - 1, key), // 孩子
-//     };
-//   });
-// }
+function createData(level = 4, parentKey = ""): any {
+  if (!level) return [];
+  const arr = new Array(16 - level).fill(0);
+  return arr.map((_, idx: number) => {
+    const key = parentKey + level + idx;
+    return {
+      xx: createLabel(level), // 显示的内容
+      prop: key, // 为了唯一性
+      children: createData(level - 1, key), // 孩子
+    };
+  });
+}
 function createLabel(level: number): string {
   if (level === 4) return "道生一";
   if (level === 3) return "一生二";
@@ -58,20 +60,20 @@ function createLabel(level: number): string {
 const data = ref(createData());
 const value = ref<key[]>([]);
 
-function createData() {
-  return [
-    {
-      label: nextLabel(),
-      key: 1,
-      isLeaf: false, // 这里isLeaf 为false 表示点击的时候动态的加载子节点
-    },
-    {
-      label: nextLabel(),
-      key: 2,
-      isLeaf: false,
-    },
-  ];
-}
+// function createData() {
+//   return [
+//     {
+//       label: nextLabel(),
+//       key: 1,
+//       isLeaf: false, // 这里isLeaf 为false 表示点击的时候动态的加载子节点
+//     },
+//     {
+//       label: nextLabel(),
+//       key: 2,
+//       isLeaf: false,
+//     },
+//   ];
+// }
 function nextLabel(currentLabel?: string | number): string {
   if (!currentLabel) return "Out of Tao, One is born";
   if (currentLabel === "Out of Tao, One is born") return "Out of One, Two";

@@ -22,6 +22,7 @@ module.exports = {
           items: [
             { text: "安装", link: "/guide/installation" },
             { text: "快速开始", link: "/guide/quieStart" },
+            { text: "知识库", link: "/guide/repository" },
           ],
         },
       ],

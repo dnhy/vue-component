@@ -1,0 +1,8 @@
+@use "mixins/mixins.scss" as *;
+
+@include b(vl) {
+  overflow-y: scroll;
+  border: 1px solid red;
+  @include e(scroll-list) {
+  }
+}
