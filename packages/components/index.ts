@@ -1,14 +1,16 @@
 import _Icon from "@dnhy/components/icon/src/icon.vue";
 import _Tree from "@dnhy/components/tree/src/tree.vue";
 import _Minirefresh from "@dnhy/components/minirefresh/src/minirefresh.vue";
+import _Input from '@dnhy/components/input/src/input.vue'
 
 import type { App } from "vue";
 
 export * from "./icon/index";
 export * from "./tree/index";
 export * from "./minirefresh/index";
+export * from "./input/index";
 
-const components = [_Icon, _Tree, _Minirefresh];
+const components = [_Icon, _Tree, _Minirefresh, _Input];
 
 const obj = {
   install(app: App) {
@@ -29,5 +31,6 @@ declare module "vue" {
     zIcon: typeof _Icon;
     zTree: typeof _Tree;
     zMinirefresh: typeof _Minirefresh;
+    zInput: typeof _Input;
   }
 }

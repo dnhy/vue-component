@@ -1,12 +1,12 @@
 <template>
   <router-view></router-view>
 
-  <!-- <z-icon :color="'black'" size="30">
+  <z-icon :color="'black'" size="30">
     <AddCircleOutline />
   </z-icon>
   <z-icon :color="'red'" size="50">
     <AddCircleOutline />
-  </z-icon> -->
+  </z-icon>
   <!-- <z-tree
     :data="data"
     lable-field="xx"
@@ -15,27 +15,38 @@
     :defaultExpandedKeys="['41', '4130']"
   ></z-tree> -->
   {{ value }}
-  <z-tree
-    :data="data"
-    :on-load="handleLoad"
-    v-model:selected-keys="value"
-    lable-field="xx"
-    key-field="prop"
-    selectable
-    multiple
-  >
+  <z-tree :data="data" :on-load="handleLoad" v-model:selected-keys="value" lable-field="xx" key-field="prop" selectable
+    multiple>
     <template #="{ node }">
       {{ node?.key + "!!!!" }} -
       {{ node?.label }}
     </template>
   </z-tree>
+  {{ inputVal }}
+  <z-input type="password" v-model="inputVal" :disabled="false" :readonly="false" :clearable="true" @focus="onFocus"
+    @blur="onBlur" @change="onChange" @input="onInput">
+
+    <template v-slot:prefixIcon>
+      <z-icon :color="'black'" size="30">
+        <CloudyNightSharp />
+      </z-icon>
+    </template>
+    <template v-slot:suffixIcon>
+      <z-icon :color="'black'" size="30">
+        <CloudyNightSharp />
+      </z-icon>
+    </template>
+  </z-input>
 </template>
 
 <script setup lang="ts">
 import type { TreeOption } from "@dnhy/components/tree";
-import { AddCircleOutline } from "@vicons/ionicons5";
-import { ref } from "vue";
+import { AddCircleOutline, CloudyNightSharp } from "@vicons/ionicons5";
+import { computed, reactive, ref, watch } from "vue";
 import type { key } from "@dnhy/components/tree";
+import func from "../../vue-temp/vue-editor-bridge";
+
+const inputVal = ref('111');
 
 function createData(level = 4, parentKey = ""): any {
   if (!level) return [];
@@ -99,6 +110,25 @@ function handleLoad(node: TreeOption) {
       ]);
     }, 1000);
   });
+}
+
+function onFocus(e) {
+  console.log('onFocus :', e);
+
+}
+
+function onBlur(e) {
+  console.log('onBlur :', e);
+
+}
+
+function onChange(e) {
+  console.log('onChange :', e);
+}
+
+function onInput(e) {
+  console.log('onInput :', e);
+
 }
 </script>
 
