@@ -37,6 +37,25 @@
       </z-icon>
     </template>
   </z-input>
+  <!-- 这里的change是输入时触发 -->
+  <z-form :model="userInfo" :rules="{
+    userName: [
+      // { required: true, message: 'Please input Form\'s userName', trigger: 'blur' },
+      { min: 3, max: 5, message: 'Length should be 3 to 5', trigger: ['change', 'blur'] },
+      { type: 'string', whitespace: true, message: 'Only contain Whitespace is not allowed'}]
+  }">
+    <z-formItem label=" 用户名" prop="userName" :rules="[{
+      required: true,
+      message: 'Please enter your userName',
+      trigger: 'blur',
+    }]">
+      <z-input v-model="userInfo.userName" />
+    </z-formItem>
+    <z-formItem label="密码" prop="password">
+      <z-input v-model="userInfo.password" type="password" />
+    </z-formItem>
+  </z-form>
+
 </template>
 
 <script setup lang="ts">
@@ -44,7 +63,12 @@ import type { TreeOption } from "@dnhy/components/tree";
 import { AddCircleOutline, CloudyNightSharp } from "@vicons/ionicons5";
 import { computed, reactive, ref, watch } from "vue";
 import type { key } from "@dnhy/components/tree";
-import func from "../../vue-temp/vue-editor-bridge";
+import type { message } from "ant-design-vue";
+
+const userInfo = reactive({
+  userName: '',
+  password: ''
+})
 
 const inputVal = ref('111');
 

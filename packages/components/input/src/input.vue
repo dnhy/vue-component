@@ -23,9 +23,10 @@
 </template>
 
 <script setup lang="ts">
-import { computed, nextTick, onMounted, ref, useAttrs, watch } from 'vue';
+import { computed, inject, nextTick, onMounted, ref, useAttrs, watch } from 'vue';
 import { CloseCircleOutline, Eye, EyeOff } from '@vicons/ionicons5';
 import { inputProps, inputEmits } from './input'
+import { FormItemContextKey } from '../../form';
 
 defineOptions({
     name: 'z-input',
@@ -42,6 +43,9 @@ const emit = defineEmits(inputEmits);
 const showPwd = ref(false);
 
 const inputRef = ref<HTMLInputElement>();
+
+const formItemContext = inject(FormItemContextKey)
+
 const setNativeInputValue = () => {
     const inputEl = inputRef.value;
     if (!inputEl) return;
@@ -53,7 +57,11 @@ onMounted(() => {
     setNativeInputValue()
 })
 
-watch(() => props.modelValue, setNativeInputValue)
+watch(() => props.modelValue, () => {
+    formItemContext?.validate('change').catch(() => { })
+
+    setNativeInputValue()
+})
 
 const showClear = computed(() => {
     return props.modelValue && props.clearable && !props.disabled && !props.readonly
@@ -64,22 +72,24 @@ const handlePasswordVisible = () => {
     focus()
 }
 
-const handleInput = (e: InputEvent) => {
+const handleInput = (e: Event) => {
     const value = (e.target as HTMLInputElement).value
-    emit('input', e)
+    emit('input', value)
     emit('update:modelValue', value)
 }
 
-const handleChange = (e: InputEvent) => {
-    const value = (e.target as HTMLInputElement).value
 
+// 这里的change是失去焦点后触发
+const handleChange = (e: Event) => {
+    const value = (e.target as HTMLInputElement).value
     emit('change', value)
 }
 
-const handleFocus = (e: InputEvent) => {
+const handleFocus = (e: FocusEvent) => {
     emit('focus', e);
 }
-const handleBlur = (e: InputEvent) => {
+const handleBlur = (e: FocusEvent) => {
+    formItemContext?.validate("blur").catch(() => { });
     emit('blur', e);
 }
 

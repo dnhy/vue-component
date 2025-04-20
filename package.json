@@ -16,6 +16,7 @@
     "@dnhy/theme-chalk": "workspace:*",
     "@dnhy/utils": "workspace:*",
     "ant-design-vue": "^4.2.6",
+    "async-validator": "^4.2.5",
     "bdjf_http": "^1.0.10",
     "typescript": "^5.7.3",
     "vant": "^4.9.17",
