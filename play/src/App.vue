@@ -42,9 +42,9 @@
     userName: [
       // { required: true, message: 'Please input Form\'s userName', trigger: 'blur' },
       { min: 3, max: 5, message: 'Length should be 3 to 5', trigger: ['change', 'blur'] },
-      { type: 'string', whitespace: true, message: 'Only contain Whitespace is not allowed'}]
+      { type: 'string', whitespace: true, message: 'Only contain Whitespace is not allowed' }]
   }">
-    <z-formItem label=" 用户名" prop="userName" :rules="[{
+    <z-formItem label="用户名" prop="userName" :rules="[{
       required: true,
       message: 'Please enter your userName',
       trigger: 'blur',
@@ -56,6 +56,10 @@
     </z-formItem>
   </z-form>
 
+  <z-upload :before-upload="handleBeforeUpload" :on-change="handleChange">
+    <button>上传</button>
+  </z-upload>
+
 </template>
 
 <script setup lang="ts">
@@ -65,6 +69,12 @@ import { computed, reactive, ref, watch } from "vue";
 import type { key } from "@dnhy/components/tree";
 import type { message } from "ant-design-vue";
 
+const handleBeforeUpload = () => {
+  return false
+}
+const handleChange = () => {
+
+}
 const userInfo = reactive({
   userName: '',
   password: ''
