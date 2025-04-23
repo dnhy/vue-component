@@ -56,7 +56,7 @@
     </z-formItem>
   </z-form>
 
-  <z-upload :before-upload="handleBeforeUpload" :on-change="handleChange">
+  <z-upload action="http://localhost:4000/upload" name="myfile" method="post" :before-upload="handleBeforeUpload" :on-change="handleChange" muliple>
     <button>上传</button>
   </z-upload>
 
@@ -67,7 +67,6 @@ import type { TreeOption } from "@dnhy/components/tree";
 import { AddCircleOutline, CloudyNightSharp } from "@vicons/ionicons5";
 import { computed, reactive, ref, watch } from "vue";
 import type { key } from "@dnhy/components/tree";
-import type { message } from "ant-design-vue";
 
 const handleBeforeUpload = () => {
   return false

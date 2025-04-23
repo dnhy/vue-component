@@ -1,5 +1,6 @@
-import type { ExtractPropTypes, PropType } from "vue";
+import type { ExtractPropTypes, Prop, PropType } from "vue";
 import { v4 as uuidv4 } from 'uuid';
+import { uploadProgressEvent } from "./upload-content.js";
 const NOOP = () => { }
 
 export interface UploadFile {
@@ -46,8 +47,8 @@ export const baseProps = {
         default: () => ({})
     },
     data: {
-        type: Boolean,
-        default: false
+        type: Object,
+        default: () => ({})
     }
 } as const;
 
@@ -57,12 +58,28 @@ export const uploadProps = {
         type: Function as PropType<(file: UploadRawFile) => Promise<boolean> | boolean>,
         default: NOOP
     },
+    beforeRemove: {
+        type: Function as PropType<(uploadFile: UploadFile, uploadFiles: UploadFiles) => Promise<boolean> | boolean>,
+        default: NOOP
+    },
     onChange: {
-        type: Function as PropType<(file: UploadFile) => void>,
+        type: Function as PropType<(file: UploadFile) => Promise<boolean> | boolean>,
+        default: NOOP
+    },
+    onSuccess: {
+        type: Function as PropType<(response: any, uploadFile: UploadFile, uploadFiles: UploadFiles) => void>,
+        default: NOOP
+    },
+    onError: {
+        type: Function as PropType<(error: any, uploadFile: UploadFile, uploadFiles: UploadFiles) => void>,
         default: NOOP
     },
     onRemove: {
-        type: Function as PropType<(file: UploadRawFile) => void>,
+        type: Function as PropType<(uploadFile: UploadFile, uploadFiles: UploadFiles) => void>,
+        default: NOOP
+    },
+    onProgress: {
+        type: Function as PropType<(e: uploadProgressEvent, uploadFiles: UploadFiles) => void>,
         default: NOOP
     }
 } as const;

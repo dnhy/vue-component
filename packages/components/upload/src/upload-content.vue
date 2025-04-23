@@ -10,7 +10,12 @@ import { createNameSpace } from '@dnhy/utils/create';
 import { ref } from 'vue';
 import { genId, UploadRawFile } from './upload';
 const bem = createNameSpace('upload');
-import { uploadContentProps } from './upload-content'
+import { uploadContentProps, uploadProgressEvent } from './upload-content'
+import { httpRequest } from './ajax';
+
+defineOptions({
+    inheritAttrs: false
+})
 
 const inputRef = ref<HTMLInputElement>()
 
@@ -23,12 +28,27 @@ const handleClick = () => {
 async function upload(rawFile: UploadRawFile) {
     inputRef.value!.value = ''
     let result = await props.beforeUpload(rawFile);
-    console.log('result :', result);
     if (!result) return props.onRemove(rawFile);
 
     const { method, name, action, headers, data } = props;
 
-
+    httpRequest({
+        name,
+        file: rawFile,
+        method,
+        headers,
+        action,
+        data,
+        onProgress: (e: uploadProgressEvent) => {
+            props.onProgress(e, rawFile);
+        },
+        onError: (err: any) => {
+            props.onError(err, rawFile)
+        },
+        onSuccess: (res: any) => {
+            props.onSuccess(res, rawFile)
+        }
+    })
 }
 
 function uploadFiles(files: FileList) {
@@ -41,7 +61,6 @@ function uploadFiles(files: FileList) {
 }
 
 const handleChange = (e: Event) => {
-    console.log('e :', (e.target as HTMLInputElement).files);
     const files = (e.target as HTMLInputElement).files!
     uploadFiles(files);
 }
