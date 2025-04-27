@@ -5,6 +5,7 @@ import _Input from '@dnhy/components/input/src/input.vue'
 import _form from '@dnhy/components/form/src/form.vue'
 import _formItem from '@dnhy/components/form/src/formItem.vue'
 import _upload from '@dnhy/components/upload/src/upload.vue'
+import _virtualList from '@dnhy/components/virtual-scroll-list/src/virtual-list'
 
 import type { App } from "vue";
 
@@ -14,8 +15,9 @@ export * from "./minirefresh/index";
 export * from "./input/index";
 export * from "./form/index";
 export * from "./upload/index";
+export * from "./virtual-scroll-list/index";
 
-const components = [_Icon, _Tree, _Minirefresh, _Input, _form, _formItem, _upload];
+const components = [_Icon, _Tree, _Minirefresh, _Input, _form, _formItem, _upload, _virtualList];
 
 const obj = {
   install(app: App) {
@@ -40,5 +42,6 @@ declare module "vue" {
     zForm: typeof _form;
     zFormItem: typeof _formItem;
     zUpload: typeof _upload;
+    ZVirtualScrollList: typeof _virtualList;
   }
 }

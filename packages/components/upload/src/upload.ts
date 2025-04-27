@@ -63,7 +63,7 @@ export const uploadProps = {
         default: NOOP
     },
     onChange: {
-        type: Function as PropType<(file: UploadFile) => Promise<boolean> | boolean>,
+        type: Function as PropType<(file: UploadFile) => void>,
         default: NOOP
     },
     onSuccess: {

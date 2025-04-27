@@ -1,6 +1,8 @@
 <template>
     <div @click="handleClick" :class="[bem.b()]">
-        <slot></slot>
+        <uploadDragger @file="uploadFiles">
+            <slot></slot>
+        </uploadDragger>
         <input type="file" ref="inputRef" :name="name" :accept="accept" :multiple="multiple" @change="handleChange">
     </div>
 </template>
@@ -12,6 +14,7 @@ import { genId, UploadRawFile } from './upload';
 const bem = createNameSpace('upload');
 import { uploadContentProps, uploadProgressEvent } from './upload-content'
 import { httpRequest } from './ajax';
+import uploadDragger from './upload-dragger.vue';
 
 defineOptions({
     inheritAttrs: false
@@ -29,7 +32,6 @@ async function upload(rawFile: UploadRawFile) {
     inputRef.value!.value = ''
     let result = await props.beforeUpload(rawFile);
     if (!result) return props.onRemove(rawFile);
-
     const { method, name, action, headers, data } = props;
 
     httpRequest({

@@ -32,7 +32,8 @@ export function httpRequest(options: uploadOptions) {
     }
 
     const formData = new FormData();
-    formData.append(options.name, options.file);
+    formData.append(options.name, options.file, options.file.name);
+    console.log('options.name, options.file :', options.name, options.file);
 
     for (const [key, value] of Object.entries(options.data)) {
         formData.append(key, value);

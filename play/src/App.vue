@@ -56,20 +56,25 @@
     </z-formItem>
   </z-form>
 
-  <z-upload action="http://localhost:4000/upload" name="myfile" method="post" :before-upload="handleBeforeUpload" :on-change="handleChange" muliple>
+  <z-upload action="http://localhost:4000/upload" :before-upload="handleBeforeUpload" :on-change="handleChange" muliple>
     <button>上传</button>
   </z-upload>
 
+  <z-virtual-scroll-list class="virtual-list" :data-sources="items" data-key="id" :keeps="30" :estimate-size="80"
+    :dataComponent="(Item as DefineComponent<{}, {}, any>)">
+  </z-virtual-scroll-list>
 </template>
 
 <script setup lang="ts">
 import type { TreeOption } from "@dnhy/components/tree";
 import { AddCircleOutline, CloudyNightSharp } from "@vicons/ionicons5";
-import { computed, reactive, ref, watch } from "vue";
+import { computed, reactive, ref, watch, type DefineComponent } from "vue";
 import type { key } from "@dnhy/components/tree";
+import { Random } from 'mockjs';
+import Item from './Item.vue'
 
 const handleBeforeUpload = () => {
-  return false
+  return true
 }
 const handleChange = () => {
 
@@ -163,6 +168,34 @@ function onInput(e) {
   console.log('onInput :', e);
 
 }
+const totalCount = 100;
+interface DataType {
+  id: number,
+  name: string,
+  desc: string,
+  index: number
+}
+const vData: DataType[] = []
+let index = 0;
+while (index !== totalCount) {
+  vData.push({
+    id: index,
+    name: Random.name(),
+    desc: Random.csentence(20, 120),
+    index
+  })
+  index++;
+}
+
+const items = ref(vData);
+
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.virtual-list {
+  width: 100%;
+  height: 550px;
+  overflow-y: scroll;
+  border: 3px solid red
+}
+</style>
