@@ -1,5 +1,5 @@
-import { computed, onMounted, reactive, ref } from "vue";
 import type { UnwrapRef } from "vue";
+import { computed, onMounted, reactive, ref } from "vue";
 
 type TApiFun<TData, TParams extends Array<any>> = (
   ...params: TParams
@@ -40,7 +40,7 @@ export type IAutoSkeletonViewResult<TData, TParams extends any[]> = UnwrapRef<{
 }>;
 
 export function useAutoSkeletonView<TData = any, TParams extends any[] = any[]>(
-  prop: IUseAutoSkeletonViewProps<TData, TParams>
+  prop: IUseAutoSkeletonViewProps<TData, TParams>,
 ): IAutoSkeletonViewResult<TData, TParams> {
   const {
     apiFun,

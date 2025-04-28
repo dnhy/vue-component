@@ -1,6 +1,6 @@
+import { createNameSpace } from "@dnhy/utils/create.js";
 import { defineComponent, PropType } from "vue";
 import { TreeNode } from "./tree";
-import { createNameSpace } from "@dnhy/utils/create.js";
 
 export default defineComponent({
   name: "virtualList",

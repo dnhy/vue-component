@@ -2,23 +2,23 @@
   <div :class="bem.b()">
     <virtualList :items="flattenTree">
       <template #default="{ node }">
-        <treeNode :node="node" :expanded="isExpanded(node)" :key="node.key" :loadingKeys="loadingKeysRef"
-          :selectedKeys="selectedKeysModel" @select="handleSelect" @toggle="toggleExpand(node)" />
+        <treeNode
+          :node="node"
+          :expanded="isExpanded(node)"
+          :key="node.key"
+          :loadingKeys="loadingKeysRef"
+          :selectedKeys="selectedKeysModel"
+          @select="handleSelect"
+          @toggle="toggleExpand(node)"
+        />
       </template>
     </virtualList>
   </div>
 </template>
 
 <script setup lang="ts">
-import {
-  computed,
-  provide,
-  reactive,
-  ref,
-  useSlots,
-  watch,
-  defineSlots,
-} from "vue";
+import { createNameSpace } from "@dnhy/utils/create";
+import { computed, provide, ref, useSlots, watch } from "vue";
 import {
   type key,
   treeInjectKey,
@@ -27,7 +27,6 @@ import {
   treeProps,
 } from "./tree";
 import treeNode from "./treeNode.vue";
-import { createNameSpace } from "@dnhy/utils/create";
 import virtualList from "./virtual-list";
 
 defineOptions({
@@ -59,7 +58,7 @@ function createOptions(key, label: string, children: string) {
 const treeOptions = createOptions(
   props.keyField,
   props.lableField,
-  props.childrenField
+  props.childrenField,
 );
 
 function createTree(data: TreeOption[], parent: TreeNode | null = null) {
@@ -94,7 +93,7 @@ watch(
   },
   {
     immediate: true,
-  }
+  },
 );
 const expandkeysSet = ref(new Set(props.defaultExpandedKeys));
 

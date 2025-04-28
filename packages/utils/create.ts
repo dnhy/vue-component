@@ -17,7 +17,7 @@ function createBem(prefixName: string) {
   const bem = (
     blockName: string = "",
     element: string = "",
-    modifier: string = ""
+    modifier: string = "",
   ) => _bem(prefixName, blockName, element, modifier);
   const is = (name: string = "", state: boolean | string) =>
     state ? `is-${name}` : "";
@@ -37,7 +37,7 @@ function _bem(
   prefixName: string,
   blockName: string,
   element: string,
-  modifier: string
+  modifier: string,
 ) {
   if (blockName) {
     prefixName += `-${blockName}`;

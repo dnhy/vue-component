@@ -60,7 +60,7 @@ const validate = (key: string, value: string) => {
 
 const [values, errors, handleChange, submitHandle] = useForm(
   initState,
-  validate
+  validate,
 ) as any;
 
 function onSubmit(values: any) {

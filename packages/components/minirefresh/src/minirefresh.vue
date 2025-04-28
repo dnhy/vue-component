@@ -14,10 +14,9 @@
 </template>
 
 <script setup lang="ts">
-import { computed, nextTick, onMounted, reactive, ref, toRefs } from "vue";
 import { myFetch } from "@dnhy/utils/request";
-import { miniProps, type MiniProps } from "./minirefresh";
-import { type DataRequest } from "./minirefresh";
+import { computed, ref } from "vue";
+import { miniProps } from "./minirefresh";
 
 // 局部注册
 // import { PullRefresh as vanPullRefresh, List as vanList } from "vant";
@@ -52,8 +51,8 @@ const onLoad = async () => {
     props.url as string,
     props.dataRequest(
       currentPageIndex.value as number,
-      currPageSize as unknown as number
-    )
+      currPageSize as unknown as number,
+    ),
   );
   if (res.code === 200) {
     listData.value = props.dataChange(res);

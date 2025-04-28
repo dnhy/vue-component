@@ -11,10 +11,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs, onMounted } from "vue";
 import { ResponseBean } from "bdjf_http";
-import ClamView from "../components/ClamView/ClamView";
+import { defineComponent, onMounted, reactive, toRefs } from "vue";
 import { RouterLink } from "vue-router";
+import ClamView from "../components/ClamView/ClamView";
 
 export default defineComponent({
   name: "Home",

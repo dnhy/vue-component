@@ -25,12 +25,12 @@
 </template>
 
 <script setup lang="ts">
-import Switcher from "../../internal-icon/Switcher";
-import Loading from "../../internal-icon/Loading";
-import { zIcon } from "../../icon";
-import { treeInjectKey, treeNodeEmits, treeNodeProps } from "./tree";
 import { createNameSpace } from "@dnhy/utils/create";
 import { computed, inject } from "vue";
+import { zIcon } from "../../icon";
+import Loading from "../../internal-icon/Loading";
+import Switcher from "../../internal-icon/Switcher";
+import { treeInjectKey, treeNodeEmits, treeNodeProps } from "./tree";
 import treeNodeContent from "./tree-node-content";
 
 const props = defineProps(treeNodeProps);

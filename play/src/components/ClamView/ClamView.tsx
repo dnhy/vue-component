@@ -1,5 +1,5 @@
-import { defineComponent, computed } from "vue";
 import { ResponseBean } from "bdjf_http";
+import { computed, defineComponent } from "vue";
 import "./clam_view.css";
 import "./skeleton.css";
 

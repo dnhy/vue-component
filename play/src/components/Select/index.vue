@@ -1,9 +1,8 @@
 <script setup name="DDemo" lang="ts">
-import { getRemoteData, submitApi } from "../../api";
-import { useFetchSelect } from "../../hooks/useFetchSelect";
 import { Button } from "ant-design-vue";
-import { useAutoRequest } from "../../hooks/useAutoRequest";
+import { getRemoteData, submitApi } from "../../api";
 import { useAutoLoading } from "../../hooks/useAutoLoading";
+import { useFetchSelect } from "../../hooks/useFetchSelect";
 // 获取选择框内容
 const { optLoading, optionsArr } = useFetchSelect({
   apiFun: getRemoteData,

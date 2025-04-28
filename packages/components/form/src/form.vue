@@ -1,31 +1,30 @@
 <template>
-    <form>
-        <slot></slot>
-    </form>
+  <form>
+    <slot></slot>
+  </form>
 </template>
 
 <script setup lang="ts">
-import { provide } from 'vue';
-import { FormContextKey, formProps } from './form';
-import type { FormItemContext } from './formItem';
+import { provide } from "vue";
+import { FormContextKey, formProps } from "./form";
+import type { FormItemContext } from "./formItem";
 
 defineOptions({
-    name: 'z-form'
-})
+  name: "z-form",
+});
 const props = defineProps(formProps);
-console.log('props :', props);
+console.log("props :", props);
 
-const fileds: FormItemContext[] = []
+const fileds: FormItemContext[] = [];
 
 const addField = (context: FormItemContext) => {
-    fileds.push(context)
-}
-
+  fileds.push(context);
+};
 
 const context = {
-    ...props,
-    addField
-}
+  ...props,
+  addField,
+};
 
 provide(FormContextKey, context);
 </script>

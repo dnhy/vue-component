@@ -39,7 +39,6 @@
 </template>
 
 <script lang="ts">
-import { reactive, ref } from "vue";
 import {
   Button,
   CellGroup,
@@ -48,6 +47,7 @@ import {
   closeToast,
   showLoadingToast,
 } from "vant";
+import { reactive } from "vue";
 
 export default {
   components: {

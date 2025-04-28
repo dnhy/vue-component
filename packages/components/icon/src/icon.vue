@@ -6,8 +6,8 @@
 
 <script setup lang="ts">
 import { createNameSpace } from "@dnhy/utils/create";
-import { iconProps } from "./icon";
 import { computed } from "vue";
+import { iconProps } from "./icon";
 defineOptions({
   name: "z-icon",
 });

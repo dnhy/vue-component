@@ -33,11 +33,11 @@
 </template>
 
 <script setup lang="ts">
-import { useAutoSkeletonView } from "../hooks/useAutoSkeletonView";
 import { getRemoteData } from "../api";
 import AsyncComp from "../components/AsyncComp";
-import Select from "../components/Select/index.vue";
 import DragList from "../components/DragList/index.vue";
+import Select from "../components/Select/index.vue";
+import { useAutoSkeletonView } from "../hooks/useAutoSkeletonView";
 
 const view = useAutoSkeletonView({
   apiFun: getRemoteData,

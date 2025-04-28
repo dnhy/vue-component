@@ -1,4 +1,4 @@
-import { defineComponent, inject, toRef, toRefs } from "vue";
+import { defineComponent, inject, toRefs } from "vue";
 import { treeInjectKey, treeNodeContentProps } from "./tree.js";
 
 export default defineComponent({

@@ -1,7 +1,7 @@
-import { h, defineComponent } from 'vue'
+import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: 'Loading',
+  name: "Loading",
   render() {
     return (
       <svg
@@ -14,6 +14,6 @@ export default defineComponent({
           fill="currentColor"
         ></path>
       </svg>
-    )
-  }
-})
+    );
+  },
+});

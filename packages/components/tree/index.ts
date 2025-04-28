@@ -1,5 +1,5 @@
-import _Tree from "./src/tree.vue";
 import { withInstall } from "@dnhy/utils/with-install.js";
+import _Tree from "./src/tree.vue";
 
 const zTree = withInstall(_Tree);
 

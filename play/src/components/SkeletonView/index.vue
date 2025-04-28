@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { defineProps, computed } from "vue";
 import { LoadingOutlined } from "@ant-design/icons-vue";
 import { Button } from "ant-design-vue";
+import { computed, defineProps } from "vue";
 
 /* status:'loading','error','success','empty' */
 type ViewStatus = "loading" | "error" | "success" | "empty";

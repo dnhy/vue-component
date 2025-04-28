@@ -1,7 +1,7 @@
 import { createApp } from "vue";
-import "./style.css";
 import App from "./App.vue";
 import router from "./router";
+import "./style.css";
 // 全局导入
 import globalComponent from "@dnhy/components";
 import "@dnhy/theme-chalk/src/index.scss";
@@ -11,8 +11,8 @@ import "@dnhy/theme-chalk/src/index.scss";
 // import "vant/lib/index.css";
 // import { zMinirefresh } from "@dnhy/components";
 // 按需引入
-import { PullRefresh, List } from "vant";
 import { Select } from "ant-design-vue";
+import { List, PullRefresh } from "vant";
 
 // const plugins = [zIcon, zTree, zMinirefresh];
 const app = createApp(App);

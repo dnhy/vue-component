@@ -15,17 +15,32 @@
     :defaultExpandedKeys="['41', '4130']"
   ></z-tree> -->
   {{ value }}
-  <z-tree :data="data" :on-load="handleLoad" v-model:selected-keys="value" lable-field="xx" key-field="prop" selectable
-    multiple>
+  <z-tree
+    :data="data"
+    :on-load="handleLoad"
+    v-model:selected-keys="value"
+    lable-field="xx"
+    key-field="prop"
+    selectable
+    multiple
+  >
     <template #="{ node }">
       {{ node?.key + "!!!!" }} -
       {{ node?.label }}
     </template>
   </z-tree>
   {{ inputVal }}
-  <z-input type="password" v-model="inputVal" :disabled="false" :readonly="false" :clearable="true" @focus="onFocus"
-    @blur="onBlur" @change="onChange" @input="onInput">
-
+  <z-input
+    type="password"
+    v-model="inputVal"
+    :disabled="false"
+    :readonly="false"
+    :clearable="true"
+    @focus="onFocus"
+    @blur="onBlur"
+    @change="onChange"
+    @input="onInput"
+  >
     <template v-slot:prefixIcon>
       <z-icon :color="'black'" size="30">
         <CloudyNightSharp />
@@ -38,17 +53,36 @@
     </template>
   </z-input>
   <!-- 这里的change是输入时触发 -->
-  <z-form :model="userInfo" :rules="{
-    userName: [
-      // { required: true, message: 'Please input Form\'s userName', trigger: 'blur' },
-      { min: 3, max: 5, message: 'Length should be 3 to 5', trigger: ['change', 'blur'] },
-      { type: 'string', whitespace: true, message: 'Only contain Whitespace is not allowed' }]
-  }">
-    <z-formItem label="用户名" prop="userName" :rules="[{
-      required: true,
-      message: 'Please enter your userName',
-      trigger: 'blur',
-    }]">
+  <z-form
+    :model="userInfo"
+    :rules="{
+      userName: [
+        // { required: true, message: 'Please input Form\'s userName', trigger: 'blur' },
+        {
+          min: 3,
+          max: 5,
+          message: 'Length should be 3 to 5',
+          trigger: ['change', 'blur'],
+        },
+        {
+          type: 'string',
+          whitespace: true,
+          message: 'Only contain Whitespace is not allowed',
+        },
+      ],
+    }"
+  >
+    <z-formItem
+      label="用户名"
+      prop="userName"
+      :rules="[
+        {
+          required: true,
+          message: 'Please enter your userName',
+          trigger: 'blur',
+        },
+      ]"
+    >
       <z-input v-model="userInfo.userName" />
     </z-formItem>
     <z-formItem label="密码" prop="password">
@@ -56,35 +90,43 @@
     </z-formItem>
   </z-form>
 
-  <z-upload action="http://localhost:4000/upload" :before-upload="handleBeforeUpload" :on-change="handleChange" muliple>
+  <z-upload
+    action="http://localhost:4000/upload"
+    :before-upload="handleBeforeUpload"
+    :on-change="handleChange"
+    muliple
+  >
     <button>上传</button>
   </z-upload>
 
-  <z-virtual-scroll-list class="virtual-list" :data-sources="items" data-key="id" :keeps="30" :estimate-size="80"
-    :dataComponent="(Item as DefineComponent<{}, {}, any>)">
+  <z-virtual-scroll-list
+    class="virtual-list"
+    :data-sources="items"
+    data-key="id"
+    :keeps="30"
+    :estimate-size="80"
+    :dataComponent="Item as DefineComponent<{}, {}, any>"
+  >
   </z-virtual-scroll-list>
 </template>
 
 <script setup lang="ts">
-import type { TreeOption } from "@dnhy/components/tree";
+import type { key, TreeOption } from "@dnhy/components/tree";
 import { AddCircleOutline, CloudyNightSharp } from "@vicons/ionicons5";
-import { computed, reactive, ref, watch, type DefineComponent } from "vue";
-import type { key } from "@dnhy/components/tree";
-import { Random } from 'mockjs';
-import Item from './Item.vue'
+import { Random } from "mockjs";
+import { reactive, ref, type DefineComponent } from "vue";
+import Item from "./Item.vue";
 
 const handleBeforeUpload = () => {
-  return true
-}
-const handleChange = () => {
-
-}
+  return true;
+};
+const handleChange = () => {};
 const userInfo = reactive({
-  userName: '',
-  password: ''
-})
+  userName: "",
+  password: "",
+});
 
-const inputVal = ref('111');
+const inputVal = ref("111");
 
 function createData(level = 4, parentKey = ""): any {
   if (!level) return [];
@@ -151,44 +193,40 @@ function handleLoad(node: TreeOption) {
 }
 
 function onFocus(e) {
-  console.log('onFocus :', e);
-
+  console.log("onFocus :", e);
 }
 
 function onBlur(e) {
-  console.log('onBlur :', e);
-
+  console.log("onBlur :", e);
 }
 
 function onChange(e) {
-  console.log('onChange :', e);
+  console.log("onChange :", e);
 }
 
 function onInput(e) {
-  console.log('onInput :', e);
-
+  console.log("onInput :", e);
 }
 const totalCount = 100;
 interface DataType {
-  id: number,
-  name: string,
-  desc: string,
-  index: number
+  id: number;
+  name: string;
+  desc: string;
+  index: number;
 }
-const vData: DataType[] = []
+const vData: DataType[] = [];
 let index = 0;
 while (index !== totalCount) {
   vData.push({
     id: index,
     name: Random.name(),
     desc: Random.csentence(20, 120),
-    index
-  })
+    index,
+  });
   index++;
 }
 
 const items = ref(vData);
-
 </script>
 
 <style lang="scss" scoped>
@@ -196,6 +234,6 @@ const items = ref(vData);
   width: 100%;
   height: 550px;
   overflow-y: scroll;
-  border: 3px solid red
+  border: 3px solid red;
 }
 </style>
