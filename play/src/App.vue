@@ -108,6 +108,10 @@
     :dataComponent="Item as DefineComponent<{}, {}, any>"
   >
   </z-virtual-scroll-list>
+  <z-icon-picker v-model="icon">
+    <template #defaultIcon>122112</template>
+  </z-icon-picker>
+  {{ icon }}
 </template>
 
 <script setup lang="ts">
@@ -116,6 +120,8 @@ import { AddCircleOutline, CloudyNightSharp } from "@vicons/ionicons5";
 import { Random } from "mockjs";
 import { reactive, ref, type DefineComponent } from "vue";
 import Item from "./Item.vue";
+
+const icon = ref();
 
 const handleBeforeUpload = () => {
   return true;

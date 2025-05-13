@@ -6,7 +6,7 @@ import _Minirefresh from "@dnhy/components/minirefresh/src/minirefresh.vue";
 import _Tree from "@dnhy/components/tree/src/tree.vue";
 import _upload from "@dnhy/components/upload/src/upload.vue";
 import _virtualList from "@dnhy/components/virtual-scroll-list/src/virtual-list";
-
+import _iconPicker from "@dnhy/components/icon-picker/src/icon-picker.vue"
 import type { App } from "vue";
 
 export * from "./form/index";
@@ -16,6 +16,7 @@ export * from "./minirefresh/index";
 export * from "./tree/index";
 export * from "./upload/index";
 export * from "./virtual-scroll-list/index";
+export * from "./icon-picker/index";
 
 const components = [
   _Icon,
@@ -26,6 +27,7 @@ const components = [
   _formItem,
   _upload,
   _virtualList,
+  _iconPicker
 ];
 
 const obj = {
@@ -52,5 +54,6 @@ declare module "vue" {
     zFormItem: typeof _formItem;
     zUpload: typeof _upload;
     ZVirtualScrollList: typeof _virtualList;
+    zIconPicker: typeof _iconPicker
   }
 }
